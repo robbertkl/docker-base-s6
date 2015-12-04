@@ -1,0 +1,8 @@
+#!/bin/bash
+
+ssl_directory="/private/ssl"
+mkdir -p "${ssl_directory}"
+cd "${ssl_directory}"
+test -e cert.pem || ln -s /etc/ssl/certs/ssl-cert-snakeoil.pem cert.pem
+test -e key.pem  || ln -s /etc/ssl/private/ssl-cert-snakeoil.key key.pem
+test -e ca.pem   || ln -s /etc/ssl/certs/ssl-cert-snakeoil.pem ca.pem
