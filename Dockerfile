@@ -7,7 +7,7 @@ RUN cleaninstall \
     rsyslog
 
 # Install s6-overlay
-RUN curl -sSL https://github.com/just-containers/s6-overlay/releases/download/v1.16.0.1/s6-overlay-amd64.tar.gz \
+RUN curl -sSL https://github.com/just-containers/s6-overlay/releases/download/v1.17.0.0/s6-overlay-amd64.tar.gz \
     | tar xzf - -C /
 RUN sed -i "s/s6-nuke -th/s6-nuke -t/" /etc/s6/init/init-stage3
 
