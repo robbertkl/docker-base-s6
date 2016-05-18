@@ -1,8 +1,22 @@
-#!/bin/bash
+#!/usr/bin/with-contenv bash
 
 ssl_directory="/private/ssl"
 mkdir -p "${ssl_directory}"
 cd "${ssl_directory}"
-test -e cert.pem || ln -s /etc/ssl/certs/ssl-cert-snakeoil.pem cert.pem
-test -e key.pem  || ln -s /etc/ssl/private/ssl-cert-snakeoil.key key.pem
-test -e ca.pem   || ln -s /etc/ssl/certs/ssl-cert-snakeoil.pem ca.pem
+
+if [ ! -e cert.pem ]
+then
+	rm -f cert.pem key.pem ca.pem
+
+	if [ -n "${LETSENCRYPT_HOST}" ]
+	then
+		LETSENCRYPT_DIR="/etc/letsencrypt/live/${LETSENCRYPT_HOST}"
+		ln -s "${LETSENCRYPT_DIR}/cert.pem" cert.pem
+		ln -s "${LETSENCRYPT_DIR}/privkey.pem" key.pem
+		ln -s "${LETSENCRYPT_DIR}/chain.pem" ca.pem
+	else
+		ln -s /etc/ssl/certs/ssl-cert-snakeoil.pem cert.pem
+		ln -s /etc/ssl/private/ssl-cert-snakeoil.key key.pem
+		ln -s /etc/ssl/certs/ssl-cert-snakeoil.pem ca.pem
+	fi
+fi

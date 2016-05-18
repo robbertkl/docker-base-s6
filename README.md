@@ -29,7 +29,9 @@ To have your custom logs show up in `docker logs`, you can append your name to e
 
 ## SSL
 
-As a convention, please copy or mount your SSL files to `/private/ssl` named `cert.pem`, `key.pem` and `ca.pem`. A default (snakeoil) certificate will be provided as a fallback. Create custom (combined) pem bundles from these files in your s6 `run` script.
+As a convention, please copy or mount your SSL files to `/private/ssl` named `cert.pem`, `key.pem` and `ca.pem`. A default (snakeoil) certificate will be provided as a fallback. Create custom (combined) pem bundles from these files in your s6 `run` scripts.
+
+Alternatively, you can mount a Let's Encrypt configuration to `/etc/letsencrypt` and set `LETSENCRYPT_HOST` to the hostname of the certificate to use. Symlinks with the correct names will then be create in `/private/ssl`.
 
 ## Authors
 
