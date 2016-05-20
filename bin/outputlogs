@@ -15,6 +15,7 @@ do
         stderr=1
         ;;
     *)
+        touch "${argument}"
         if [ "${stderr}" -eq 0 ]
         then
             tail ${tail_arguments} "${argument}" &
